@@ -121,14 +121,20 @@ WSGI_APPLICATION = "clinic.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": config("DATABASE_NAME", cast=str),
+#         "USER": config("DATABASE_USER", cast=str),
+#         "PASSWORD": config("DATABASE_PASSWORD", cast=str),
+#         "HOST": config("DATABASE_URL", cast=str),
+#         "PORT": config("DATABASE_PORT", cast=str),
+#     }
+# }
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": config("DATABASE_NAME", cast=str),
-        "USER": config("DATABASE_USER", cast=str),
-        "PASSWORD": config("DATABASE_PASSWORD", cast=str),
-        "HOST": config("DATABASE_URL", cast=str),
-        "PORT": config("DATABASE_PORT", cast=str),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
