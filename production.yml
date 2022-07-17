@@ -1,0 +1,47 @@
+version: "3.3"
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: clinic_mysql_database
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - my-db:/var/lib/mysql
+      - ./compose/db/custom_mysql_conf.cnf:/etc/mysql/conf.d/custom.cnf
+    ports:
+      - "3307:3306"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/production/Dockerfile
+    image: clinic_web
+    container_name: clinic_web
+    restart: always
+    command: /start.sh
+    expose:
+      - "8020"
+    links:
+      - db
+    depends_on:
+      - db
+    env_file: .env
+
+  nginx:
+    # https://github.com/staticfloat/docker-nginx-certbot
+    restart: unless-stopped
+    image: staticfloat/nginx-certbot
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    environment:
+      CERTBOT_EMAIL: owner@company.com
+    volumes:
+      - ./compose/production/nginx:/etc/nginx/user.conf.d:ro
+      - letsencrypt:/etc/letsencrypt
+
+volumes:
+  my-db:
+  letsencrypt:

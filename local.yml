@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: clinic_mysql_database
+    restart: always
+    env_file:
+      - .docker.env
+    volumes:
+      - ./mysql_db:/var/lib/mysql
+      - ./compose/db/custom_mysql_conf.cnf:/etc/mysql/conf.d/custom.cnf
+    ports:
+      - "3307:3306"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/local/Dockerfile
+    image: clinic_web
+    container_name: clinic_web
+    restart: on-failure
+    command: /start.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db
+    env_file: .docker.env
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    logging:
+      driver: none
+
+volumes:
+  letsencrypt:
