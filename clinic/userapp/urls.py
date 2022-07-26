@@ -19,7 +19,6 @@ router.register("users/email", VerifyMailViewSet, basename="email_verification")
 urlpatterns = [
     #
     path("auth/", include("dj_rest_auth.urls")),
-    path("users/me/", UserView.as_view(), name="me"),
     #
     path("", include(router.urls)),
     path("accounts/", include("allauth.urls")),
