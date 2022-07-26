@@ -5,7 +5,6 @@ from clinic.userapp.views import (
     FacebookLogin,
     ForgetPasswordViewSet,
     GoogleLogin,
-    UserView,
     UserViewSet,
     VerifyMailViewSet,
 )
