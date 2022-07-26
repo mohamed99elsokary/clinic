@@ -11,7 +11,16 @@ class UserSerializer(CustomModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "email", "username", "phone", "password", "fcm_token")
+        fields = (
+            "id",
+            "email",
+            "username",
+            "phone",
+            "password",
+            "fcm_token",
+            "first_name",
+            "last_name",
+        )
 
     def create(self, validated_data):
         fcm_token = validated_data.pop("fcm_token")

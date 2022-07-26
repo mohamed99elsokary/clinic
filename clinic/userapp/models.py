@@ -1,6 +1,3 @@
-from email.policy import default
-from tkinter import N
-
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -20,14 +17,14 @@ class User(CustomModel, AbstractUser):
         verbose_name="email address",
         unique=True,
     )
-    first_name = models.CharField(max_length=50, null=True, blank=True, default=None)
-    last_name = models.CharField(max_length=50, null=True, blank=True, default=None)
-    phone_number = models.CharField(max_length=300, null=True, blank=True, default=None)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=300)
+    phone = models.CharField(_("Phone"), max_length=50)
     username = models.CharField(
         _("username"),
         max_length=150,
     )
-    phone = models.CharField(_("Phone"), max_length=50, null=True, blank=True)
 
     # verification
     is_active = models.BooleanField(default=True)
