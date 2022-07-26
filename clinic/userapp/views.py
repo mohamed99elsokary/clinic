@@ -285,7 +285,8 @@ class ForgetPasswordViewSet(viewsets.GenericViewSet):
 
 from django.db import transaction
 from rest_framework.generics import GenericAPIView
-from sydal.userapp.permissions import UserViewPermission
+
+from clinic.userapp.permissions import UserViewPermission
 
 
 class UserView(GenericAPIView):
