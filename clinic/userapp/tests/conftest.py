@@ -17,6 +17,6 @@ def user_sign_up_data(country):
     return {
         "email": "user@example.com",
         "username": "string",
-        "phone": "string",
+        "phone_number": "string",
         "password": "string",
     }

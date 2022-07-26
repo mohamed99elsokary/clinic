@@ -15,7 +15,7 @@ class UserSerializer(CustomModelSerializer):
             "id",
             "email",
             "username",
-            "phone",
+            "phone_number",
             "password",
             "fcm_token",
             "first_name",

@@ -20,7 +20,6 @@ class User(CustomModel, AbstractUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=300)
-    phone = models.CharField(_("Phone"), max_length=50)
     username = models.CharField(
         _("username"),
         max_length=150,

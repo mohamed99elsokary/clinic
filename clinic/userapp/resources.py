@@ -15,7 +15,7 @@ class UserResource(resources.ModelResource):
             "date_joined",
             "email",
             "username",
-            "phone",
+            "phone_number",
             "verification_code",
             "password_reset_code",
         ]
