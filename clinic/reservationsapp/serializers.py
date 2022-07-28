@@ -3,6 +3,7 @@ from datetime import datetime
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
+from clinic.conversationapp.models import Conversation
 from clinic.servicesapp import models as services_models
 
 from . import models
@@ -81,7 +82,7 @@ class ReservationSerializer(serializers.Serializer):
         request = self.context.get("request")
 
         user = request.user
-        service = models.Reservation.objects.create(
+        reservation = models.Reservation.objects.create(
             user=user,
             service=service,
             date=date,
@@ -90,7 +91,13 @@ class ReservationSerializer(serializers.Serializer):
             price=validated_data.get("price"),
             is_paid=validated_data.get("is_paid"),
         )
-        return service
+        Conversation.objects.create(
+            user=user,
+            reservation=reservation,
+            date=date,
+            start_time=start_time,
+        )
+        return reservation
 
 
 class MyReservationSerializer(serializers.ModelSerializer):

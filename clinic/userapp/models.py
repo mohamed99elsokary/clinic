@@ -27,7 +27,7 @@ class User(CustomModel, AbstractUser):
 
     # verification
     is_active = models.BooleanField(default=True)
-
+    is_doctor = models.BooleanField(default=False)
     verification_code = models.CharField(
         max_length=10, default=rand_int_4digits, null=True, blank=True
     )

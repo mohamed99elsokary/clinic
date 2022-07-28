@@ -22,6 +22,7 @@ class UserAdmin(BaseUserAdmin, ImportExportModelAdmin):
             _("Permissions"),
             {
                 "fields": (
+                    "is_doctor",
                     "is_active",
                     "is_staff",
                     "is_superuser",
