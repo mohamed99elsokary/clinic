@@ -9,7 +9,11 @@ class MessageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         request = self.context.get("request")
         validated_data["user"] = request.user
-
+        conversation = validated_data["conversation"]
+        if conversation.is_closed == True:
+            raise serializers.ValidationError(
+                {"conversation": "this conversation is closed"}
+            )
         return models.Message.objects.create(**validated_data)
 
     class Meta:
