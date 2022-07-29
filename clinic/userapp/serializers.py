@@ -95,7 +95,9 @@ class LoginSerializerr(CustomModelSerializer):
     def create(self, data):
         user = authenticate(email=data["email"], password=data["password"])
         if user == None:
-            raise serializers.ValidationError({"username": "Invalid password"})
+            raise serializers.ValidationError(
+                {"email or password": "Invalid email or password"}
+            )
         else:
             FcmToken.objects.get_or_create(user=user, token=data["fcm_token"])
         return user
