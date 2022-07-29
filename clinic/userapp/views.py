@@ -91,12 +91,12 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         serializer.is_valid()
         return Response(serializer.data, status=201)
 
-    @action(methods=["post"], url_path="change-password", detail=False)
-    def change_password(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({"detail": "New password has been saved."}, status=200)
+    # @action(methods=["post"], url_path="change-password", detail=False)
+    # def change_password(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response({"detail": "New password has been saved."}, status=200)
 
     # @action(methods=["get"], url_path="user-data", detail=False)
     # def get_user_data(self, request, *args, **kwargs):
