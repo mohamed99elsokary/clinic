@@ -101,3 +101,22 @@ class LoginSerializerr(CustomModelSerializer):
         else:
             FcmToken.objects.get_or_create(user=user, token=data["fcm_token"])
         return user
+
+
+class ChangePasswordSerializer(CustomModelSerializer):
+    old_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ("id",)
+
+    def create(self, data):
+        user = self.context["request"].user
+        user_email = user.email
+        user = authenticate(email=user_email, password=data["old_password"])
+        if user == None:
+            raise serializers.ValidationError({"password": "Invalid password"})
+        else:
+            user.set_password(data["new_password"])
+        return user

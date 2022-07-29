@@ -16,6 +16,7 @@ from clinic.services.exceptions import Http400
 from clinic.services.helpers import rand_int_4digits
 from clinic.userapp import models
 from clinic.userapp.serializers import (
+    ChangePasswordSerializer,
     CodeMailSerializer,
     EmailSerializer,
     LoginSerializerr,
@@ -42,6 +43,10 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
             return LogoutSerializer
         elif self.action == "login":
             return LoginSerializerr
+        elif self.action == "change_password":
+            return ChangePasswordSerializer
+        elif self.action == "get_user_data":
+            return UserSerializer
 
     @action(methods=["post"], url_path="register", detail=False)
     def register(self, request):
@@ -85,6 +90,19 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         )
         serializer.is_valid()
         return Response(serializer.data, status=201)
+
+    @action(methods=["post"], url_path="change-password", detail=False)
+    def change_password(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"detail": "New password has been saved."}, status=200)
+
+    @action(methods=["get"], url_path="user-data", detail=False)
+    def get_user_data(self, request, *args, **kwargs):
+        user = request.user
+        serializer = self.get_serializer(data=user)
+        return Response(serializer.data)
 
 
 class LoginView(TokenObtainPairView):
