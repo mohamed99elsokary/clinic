@@ -98,11 +98,11 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     #     serializer.save()
     #     return Response({"detail": "New password has been saved."}, status=200)
 
-    # @action(methods=["get"], url_path="user-data", detail=False)
-    # def get_user_data(self, request, *args, **kwargs):
-    #     user = request.user
-    #     serializer = self.get_serializer(data=user)
-    #     return Response(serializer.data)
+    @action(methods=["get"], url_path="user-data", detail=False)
+    def get_user_data(self, request, *args, **kwargs):
+        user = request.user
+        serializer = self.get_serializer(data=user)
+        return Response(serializer.data)
 
 
 class LoginView(TokenObtainPairView):
