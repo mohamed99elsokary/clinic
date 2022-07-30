@@ -39,7 +39,6 @@ AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.AllowAllUsersModelBacke
 
 DJANGO_APPS = [
     "clinic.voltapp",
-    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -174,7 +173,6 @@ USE_TZ = True
 
 gettext = lambda s: s  # noqa
 LANGUAGES = (("en", gettext("English")), ("ar", gettext("Arabic")))
-MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
 
 LOCALE_PATHS = (normpath(join(BASE_DIR, "locale")),)
 

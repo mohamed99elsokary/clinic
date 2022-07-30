@@ -1,16 +1,6 @@
 from django.contrib import admin
-from modeltranslation.translator import TranslationOptions, register
 
 from . import models
-
-# @register(models.Article)
-# class Article(TranslationOptions):
-#     fields = ["name"]
-
-
-# @register(models.ArticleDetails)
-# class ArticleDetails(TranslationOptions):
-#     fields = ["text"]
 
 
 @admin.register(models.Article)
