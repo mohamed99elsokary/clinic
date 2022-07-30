@@ -109,7 +109,7 @@ class ChangePasswordSerializer(CustomModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id",)
+        fields = ("id", "old_password", "new_password")
 
     def create(self, data):
         user = self.context["request"].user
@@ -119,4 +119,5 @@ class ChangePasswordSerializer(CustomModelSerializer):
             raise serializers.ValidationError({"password": "Invalid password"})
         else:
             user.set_password(data["new_password"])
+            user.save()
         return user
