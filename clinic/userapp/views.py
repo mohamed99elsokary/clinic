@@ -101,7 +101,7 @@ class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     @action(methods=["get"], url_path="user-data", detail=False)
     def get_user_data(self, request, *args, **kwargs):
         user = request.user
-        serializer = self.get_serializer(data=user)
+        serializer = self.get_serializer(user)
         return Response(serializer.data)
 
 
